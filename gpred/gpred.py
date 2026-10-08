@@ -61,7 +61,12 @@ def read_fasta(fasta_file: Path) -> str:
     :param fasta_file: (Path) Path to the fasta file.
     :return: (str) Sequence from the genome. 
     """
-    pass
+    sequence = ""
+    with open(fasta_file, "r") as fich:
+        for line in fich:
+            if not line.startswith(">"):
+                sequence += line.strip()
+    return sequence.upper()
 
 
 def find_start(start_regex: Pattern, sequence: str, start: int, stop: int) -> Union[int, None]:
